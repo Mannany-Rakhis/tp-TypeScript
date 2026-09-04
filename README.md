@@ -4,9 +4,8 @@ Mini-jeu de role CLI en TypeScript strict.
 
 | Champ | Valeur |
 |---|---|
-| Nom | [A remplir] |
-| Prenom | [A remplir] |
-| Groupe / Module | [A remplir] |
+| Nom : Rakhis | RANDRIAMANANTENASOA
+| Prenom : Mannany | Lovaniaina Sitraka
 
 ## Installation
 
