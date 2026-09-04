@@ -1,0 +1,10 @@
+{
+  "name": "typequest",
+  "version": "1.0.0",
+  "description": "Mini-jeu de role CLI en TypeScript strict : 3 zones, un boss final, zero any.",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": { "build": "tsc", "start": "tsc && node dist/main.js", "watch": "tsc --watch" },
+  "devDependencies": { "@types/node": "^20.12.7", "typescript": "^5.4.5" }
+}
