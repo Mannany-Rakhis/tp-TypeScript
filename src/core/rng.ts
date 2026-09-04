@@ -1,24 +1,43 @@
-import type { TiragePondere } from "../models";
+import type { EspeceMonstre, Objet, TirageButin, TypeButin } from "../models";
 
-export function entierAleatoire(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function indexAleatoire(taille: number): number {
+  return Math.floor(Math.random() * taille);
 }
 
-export function elementAleatoire<T>(elements: readonly T[]): T {
-  if (elements.length === 0) throw new Error("Tirage impossible : liste vide.");
-  const element = elements[entierAleatoire(0, elements.length - 1)];
-  if (element === undefined) throw new Error("Tirage incoherent : index hors bornes.");
-  return element;
-}
-
-/** Tirage par segments cumules : 60/30/10 donne exactement les poids annonces. */
-export function tiragePondere<T>(elements: readonly TiragePondere<T>[]): T {
-  const poidsTotal = elements.reduce((total, element) => total + element.poids, 0);
-  if (poidsTotal <= 0) throw new Error("Tirage pondere impossible : poids nul.");
-  let jet = Math.random() * poidsTotal;
-  for (const element of elements) {
-    jet -= element.poids;
-    if (jet < 0) return element.valeur;
+export function choisirEspece(especes: readonly EspeceMonstre[]): EspeceMonstre {
+  if (especes.length === 0) {
+    throw new Error("Impossible de choisir un monstre dans une zone vide.");
   }
-  throw new Error("Tirage pondere incoherent.");
+  const espece = especes[indexAleatoire(especes.length)];
+  if (espece === undefined) {
+    throw new Error("Espece de monstre introuvable.");
+  }
+  return espece;
+}
+
+export function choisirObjet(objets: readonly Objet[]): Objet {
+  if (objets.length === 0) {
+    throw new Error("Impossible de choisir un objet dans une liste vide.");
+  }
+  const objet = objets[indexAleatoire(objets.length)];
+  if (objet === undefined) {
+    throw new Error("Objet introuvable.");
+  }
+  return objet;
+}
+
+export function tirerTypeButin(table: readonly TirageButin[]): TypeButin {
+  const poidsTotal = table.reduce((total, ligne) => total + ligne.poids, 0);
+  if (poidsTotal <= 0) {
+    throw new Error("La table de butin ne contient aucun poids valide.");
+  }
+
+  let tirage = Math.random() * poidsTotal;
+  for (const ligne of table) {
+    tirage -= ligne.poids;
+    if (tirage < 0) {
+      return ligne.valeur;
+    }
+  }
+  throw new Error("Aucun resultat de butin n a ete selectionne.");
 }

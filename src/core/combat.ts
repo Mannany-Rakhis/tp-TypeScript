@@ -10,6 +10,10 @@ export function herosEstVivant(heros: Personnage): boolean {
   return heros.pvActuels > 0;
 }
 
+function retirerPv(pv: number, degats: number): number {
+  return Math.max(0, pv - degats);
+}
+
 function journaliser(attaquant: string, cible: string, degats: number, pv: number, pvMax: number): void {
   console.log(`${attaquant} attaque ${cible} !`);
   console.log(`${degats} degats !`);
@@ -27,17 +31,15 @@ export function menerCombat(heros: Personnage, monstre: Monstre): ResultatCombat
   console.log(SEPARATEUR);
 
   while (herosEstVivant(heros) && monstre.pv > 0) {
-    if (herosEstVivant(heros)) {
-      const degats = calculerDegats(heros.attaque, monstre.defense);
-      monstre.pv = Math.max(0, monstre.pv - degats);
-      journaliser(heros.nom, monstre.nom, degats, monstre.pv, monstre.pvMax);
-    }
+    const degatsHeros = calculerDegats(heros.attaque, monstre.defense);
+    monstre.pv = retirerPv(monstre.pv, degatsHeros);
+    journaliser(heros.nom, monstre.nom, degatsHeros, monstre.pv, monstre.pvMax);
+
     if (monstre.pv <= 0) break;
-    if (monstre.pv > 0) {
-      const degats = calculerDegats(monstre.attaque, heros.defense);
-      heros.pvActuels = Math.max(0, Math.min(heros.pvMax, heros.pvActuels - degats));
-      journaliser(monstre.nom, heros.nom, degats, heros.pvActuels, heros.pvMax);
-    }
+
+    const degatsMonstre = calculerDegats(monstre.attaque, heros.defense);
+    heros.pvActuels = retirerPv(heros.pvActuels, degatsMonstre);
+    journaliser(monstre.nom, heros.nom, degatsMonstre, heros.pvActuels, heros.pvMax);
   }
   return herosEstVivant(heros) ? "victoire" : "defaite";
 }

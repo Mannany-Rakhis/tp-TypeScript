@@ -47,9 +47,9 @@ export interface Objet {
 export type ResultatCombat = "victoire" | "defaite";
 export type TypeButin = "rien" | "potion" | "arme";
 
-export interface TiragePondere<T> {
+export interface TirageButin {
   readonly poids: number;
-  readonly valeur: T;
+  readonly valeur: TypeButin;
 }
 
 export interface EtatPartie {

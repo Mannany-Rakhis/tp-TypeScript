@@ -1,4 +1,4 @@
-import type { Objet, TiragePondere, TypeButin } from "../models";
+import type { Objet, TirageButin } from "../models";
 
 export const POTIONS: readonly Objet[] = [
   { nom: "Potion de soin mineure", categorie: "Potion", valeur: 25 },
@@ -11,7 +11,7 @@ export const ARMES: readonly Objet[] = [
   { nom: "Lame de narrowing", categorie: "Arme", valeur: 10 }
 ];
 
-export const TABLE_BUTIN: readonly TiragePondere<TypeButin>[] = [
+export const TABLE_BUTIN: readonly TirageButin[] = [
   { poids: 60, valeur: "rien" },
   { poids: 30, valeur: "potion" },
   { poids: 10, valeur: "arme" }

@@ -6,7 +6,13 @@ export const ESPECES_MONSTRES = {
   loupMutex: { nom: "Loup des Mutex", pvMax: 70, attaque: 14, defense: 5, xpDonnee: 85, orDonne: 30 },
   troll: { nom: "Troll", pvMax: 90, attaque: 16, defense: 6, xpDonnee: 110, orDonne: 40 },
   golemBytecode: { nom: "Golem de bytecode", pvMax: 105, attaque: 17, defense: 8, xpDonnee: 140, orDonne: 60 }
-} as const satisfies Readonly<Record<string, EspeceMonstre>>;
+} as const satisfies {
+  ratGeant: EspeceMonstre;
+  gobelin: EspeceMonstre;
+  loupMutex: EspeceMonstre;
+  troll: EspeceMonstre;
+  golemBytecode: EspeceMonstre;
+};
 
 export const ZONES: readonly DefinitionZone[] = [
   { nom: "la Foret des Types", especes: [ESPECES_MONSTRES.ratGeant, ESPECES_MONSTRES.gobelin] },
