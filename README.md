@@ -2,8 +2,8 @@
 
 ## Nom/Prenom
 
-- Nom : [A remplir]
-- Prenom : [A remplir]
+- Nom : Rakhis | RANDRIAMANANTENASOA
+- Prenom : Mannany | Sitraka
 
 ## Installation
 
