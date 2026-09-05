@@ -1,10 +1,12 @@
-import type { Personnage } from "../models";
+import type { Personnage } from "../models/personnage";
 
-const XP_PAR_NIVEAU = 100;
+export const XP_PAR_NIVEAU = 100;
 
-export function accorderExperience(heros: Personnage, xpGagnee: number): number {
-  heros.experience += xpGagnee;
+export function ajouterExperience(heros: Personnage, gain: number): number {
+  heros.experience += gain;
   let niveauxGagnes = 0;
+
+  // while conserve l'XP excedentaire et gere plusieurs niveaux dans un seul gain.
   while (heros.experience >= XP_PAR_NIVEAU) {
     heros.experience -= XP_PAR_NIVEAU;
     heros.niveau += 1;
@@ -15,14 +17,4 @@ export function accorderExperience(heros: Personnage, xpGagnee: number): number 
     niveauxGagnes += 1;
   }
   return niveauxGagnes;
-}
-
-export function soigner(heros: Personnage, montant: number): number {
-  const avant = heros.pvActuels;
-  heros.pvActuels = Math.min(heros.pvMax, avant + montant);
-  return heros.pvActuels - avant;
-}
-
-export function accorderOr(heros: Personnage, montant: number): void {
-  heros.or += montant;
 }

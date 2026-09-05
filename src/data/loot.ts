@@ -1,18 +1,22 @@
-import type { Objet, TirageButin } from "../models";
+import type { Arme, Objet, Potion } from "../models/objet";
+import type { TypeButin } from "../models/types";
 
-export const POTIONS: readonly Objet[] = [
-  { nom: "Potion de soin mineure", categorie: "Potion", valeur: 25 },
-  { nom: "Potion de soin", categorie: "Potion", valeur: 45 }
-];
+export function tirerTypeButin(random: () => number = Math.random): TypeButin {
+  const tirage = random();
+  // Intervalles cumules: 0-60% rien, 60-90% potion, 90-100% arme.
+  if (tirage < 0.6) return "rien";
+  if (tirage < 0.9) return "potion";
+  return "arme";
+}
 
-export const ARMES: readonly Objet[] = [
-  { nom: "Dague en const", categorie: "Arme", valeur: 4 },
-  { nom: "Epee d acier strict", categorie: "Arme", valeur: 7 },
-  { nom: "Lame de narrowing", categorie: "Arme", valeur: 10 }
-];
-
-export const TABLE_BUTIN: readonly TirageButin[] = [
-  { poids: 60, valeur: "rien" },
-  { poids: 30, valeur: "potion" },
-  { poids: 10, valeur: "arme" }
-];
+export function creerButin(type: TypeButin): Objet | null {
+  if (type === "potion") {
+    const potion: Potion = { nom: "Potion de soin", categorie: "Potion", valeur: 35 };
+    return potion;
+  }
+  if (type === "arme") {
+    const arme: Arme = { nom: "Lame renforcee", categorie: "Arme", valeur: 5 };
+    return arme;
+  }
+  return null;
+}

@@ -1,10 +1,15 @@
-import type { EspeceMonstre } from "../models";
+import type { Monstre } from "../models/monstre";
 
-export const BOSS_FINAL: EspeceMonstre = {
+export const BOSS_FINAL: Monstre = {
   nom: "Le Dragon de TypeScript",
-  pvMax: 180,
-  attaque: 23,
-  defense: 8,
-  xpDonnee: 500,
-  orDonne: 200
+  pv: 220,
+  pvMax: 220,
+  attaque: 28,
+  defense: 12,
+  xpDonne: 300,
+  orDonne: 100
 };
+
+export function spawnBoss(): Monstre {
+  return { ...BOSS_FINAL, pv: BOSS_FINAL.pvMax };
+}
